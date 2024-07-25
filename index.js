@@ -59,14 +59,17 @@ app.post('/web-data', async (req,res) => {
       id: queruId,
       title: "Успешная покупка",
       input_message_content: {message_text: 'Поздравляю с покупкой, вы приобрели товар на сумму' +totalPrice}
-    })
-  }catch(e) {
+    }) 
+    return res.status(200).json({})
+  }
+  catch(e) {
     await bot.answerWebAppQuery(queruId, {
       type: 'article',
       id: queruId,
       title: "Не удалось приобрести товар",
       input_message_content: {message_text: "Не удалось приобрести товар"}
     })
+    return res.status(500).json({})
   }
    
 })
